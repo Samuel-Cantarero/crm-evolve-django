@@ -1,0 +1,44 @@
+{% extends 'crm/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Facturas</h2>
+        <a href="{% url 'invoice_create' %}" class="btn btn-success">Añadir factura</a>
+    </div>
+    <div class="card shadow">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Importe</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices %}
+                    <tr>
+                        <td>{{ invoice.id }}</td>
+                        <td>{{ invoice.user.first_name }} {{ invoice.user.last_name }}</td>
+                        <td>{{ invoice.amount }} €</td>
+                        <td>{{ invoice.date|date:"d/m/Y H:i" }}</td>
+                        <td>{{ invoice.get_status_display }}</td>
+                        <td>
+                            <a href="{% url 'invoice_edit' invoice.id %}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{% url 'invoice_delete' invoice.id %}" class="btn btn-sm btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No hay facturas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
