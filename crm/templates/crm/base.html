@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link{% if request.resolver_match.url_name == 'invoice_list' %} active{% endif %}" href="{% url 'invoice_list' %}">Facturas</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.url_name == 'financial_summary' %} active{% endif %}" href="{% url 'financial_summary' %}">Resumen Financiero</a>
+                    </li>
                 </ul>
             </div>
         </div>
