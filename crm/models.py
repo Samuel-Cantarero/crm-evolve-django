@@ -12,6 +12,7 @@ class User(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Invoice(models.Model):
+    id = models.AutoField(primary_key=True)
     STATUS_CHOICES = [
         ('pending', 'Pendiente'),
         ('paid', 'Pagada'),

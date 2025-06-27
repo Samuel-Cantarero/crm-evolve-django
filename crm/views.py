@@ -80,6 +80,9 @@ def invoice_delete(request, pk):
         return redirect('invoice_list')
     return render(request, 'crm/invoice_confirm_delete.html', {'invoice': invoice})
 
+from django.db.models import Sum
+from .models import User
+
 def financial_summary(request):
     users = User.objects.all().annotate(total=Sum('invoices__amount'))
     return render(request, 'crm/financial_summary.html', {'users': users})
